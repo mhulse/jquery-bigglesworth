@@ -1,0 +1,34 @@
+{
+  "title": "Mr. Bigglesworth",
+  "name": "bigglesworth",
+  "description": "Why must I be surrounded by frickin' idiots?",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mhulse/bigglesworth",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mhulse/bigglesworth.git"
+  },
+  "author": {
+    "name": "Micky Hulse",
+    "url": "http://mky.io"
+  },
+  "keywords": [
+    "javascript",
+    "jquery"
+  ],
+  "licenses": [
+    {
+      "type": "Apache License, Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "grunt": "0.4.2",
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-uglify": "0.2.7",
+    "grunt-contrib-concat": "0.3.0"
+  },
+  "devDependencies": {}
+}

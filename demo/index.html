@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+	
+	<meta charset="utf-8">
+	
+	<title>Mr. Bigglesworth</title>
+	<meta name="description" content="Why must I be surrounded by frickin' idiots?">
+	
+	<style>
+		
+		
+		
+	</style>
+	
+</head>
+<body>
+	
+	<form id="search" class="form" method="get" action="http://www.google.com/search" role="search">
+		
+		<input type="hidden" name="sitesearch" value="mky.io">
+		
+		<label>Search: <input id="query" type="search" name="q" placeholder="&hellip; search &hellip;" autocomplete="off"></label>
+
+	</form>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="../bigglesworth/jquery.bigglesworth.min.js"></script>
+	
+	<script>
+		
+		$(document).ready(function() {
+			
+			// http://stackoverflow.com/a/11335081/922323
+			// $.fn.jse.format = function(data, obj) {
+			// 	'use strict';
+			// 	console.log(data, obj);
+			// 	data.results.append('foo');
+			// };
+			
+			// @todo Custom `format()` function (need dates).
+			// @todo Need area to spit out "not found" message (vs. use same area as results).
+			// @todo Hide the not found and results areas when empty.
+			// @todo Show animated ... when typing/waiting for things.
+			// @todo Results animation fade-in/out?
+			var $ul = $('<ul>', { id : 'results' }),
+			    $search = $('#query');
+			
+			$search
+				.closest('label')
+				.after($ul);
+			
+			$search.bigglesworth({
+				template : '<li><a href="{ href }">{ title }</a></li>',
+				zilch : '<li><i aria-hidden="true" class="fa fa-times-circle"></i> Nothing found.</li>'
+			});
+			
+		});
+		
+	</script>
+	
+</body>
+</html>
