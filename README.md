@@ -8,6 +8,16 @@
 
 ---
 
+## Demo
+
+Click or scan:
+
+[![qr code](http://chart.apis.google.com/chart?cht=qr&chl=https://github.com/mhulse/bigglesworth/&chs=240x240)](http://mhulse.github.com/bigglesworth/demo/)
+
+**Source:** [jquery.bigglesworth.js](https://raw.github.com/mhulse/bigglesworth/gh-pages/bigglesworth/jquery.bigglesworth.js) | [jquery.bigglesworth.min.js](https://raw.github.com/mhulse/bigglesworth/gh-pages/bigglesworth/jquery.bigglesworth.min.js)
+
+---
+
 More information coming soon.
 
 ---
