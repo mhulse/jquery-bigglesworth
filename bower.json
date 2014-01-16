@@ -1,0 +1,20 @@
+{
+  "name": "bigglesworth",
+  "version": "0.1.0",
+  "main": [
+    "./bigglesworth/jquery.bigglesworth.js"
+  ],
+  "ignore": [
+    "build",
+    "demo",
+    "**/.*",
+    "**/*.md",
+    "**/*.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "jquery",
+    "javascript"
+  ]
+}
