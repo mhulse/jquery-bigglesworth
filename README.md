@@ -1,8 +1,9 @@
-<a href="http://gruntjs.com/" title="Built with Grunt"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt" align="right"></a>
-
 # Mr. Bigglesworth
 
 [![Mr. Bigglesworth](bigglesworth.gif)](http://youtu.be/oNKWA7jn_KY?t=40s)
+
+<a href="http://gruntjs.com/" title="Built with Grunt"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt" align="right"></a>
+
 **Why must I be surrounded by frickin' idiots?**
 
 ---
