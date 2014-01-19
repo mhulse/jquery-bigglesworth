@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 0.1.0
- * @date 2014/01/18
+ * @date 2014/01/19
  */
 
 /* jshint -W083, unused: vars */
@@ -770,7 +770,7 @@
 			    $children = $this.children();
 			
 			//----------------------------------
-			// Children exist?
+			// Do children exist?
 			//----------------------------------
 			
 			if ($children.length) {

@@ -757,7 +757,7 @@
 			    $children = $this.children();
 			
 			//----------------------------------
-			// Children exist?
+			// Do children exist?
 			//----------------------------------
 			
 			if ($children.length) {
