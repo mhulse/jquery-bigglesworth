@@ -303,7 +303,7 @@
 	};
 	
 	$.fn[NS].format = function(data, obj) {
-					
+		
 		var item = data.settings.resultsTemplate.replace(/\{(.*?)\}/g, function(match, property) {
 			
 			return obj[$.trim(property)];

@@ -101,11 +101,18 @@
 		$(document).ready(function() {
 			
 			// http://stackoverflow.com/a/11335081/922323
-			// $.fn.jse.format = function(data, obj) {
-			// 	'use strict';
-			// 	console.log(data, obj);
-			// 	data.results.append('foo');
-			// };
+			$.fn.bigglesworth.format = function(data, obj) {
+				
+				data.results.append(
+					'<li>' +
+						obj.date.month + ' ' + obj.date.day + ', ' + obj.date.year + ' | ' +
+						'<a href="' + obj.href + '">' +
+							obj.title +
+						'</a>' +
+					'</li>'
+				);
+				
+			};
 			
 			var $ul = $('<ul>', { id : 'bigglesworth_results' }),
 			    $p = $('<div>', { id : 'bigglesworth_results-no' }),
@@ -116,7 +123,7 @@
 				.after($p, $ul);
 			
 			$search.bigglesworth({
-				resultsTemplate : '<li><a href="{ href }">{ title }</a></li>',
+				//resultsTemplate : '<li><a href="{ href }">{ title }</a></li>',
 				resultsNoTemplate : '<p>Nothing found.</p>'
 			});
 			
