@@ -67,7 +67,7 @@ The search elements, and results, can be styled as you see fit; check out the [d
 
 ### JSON:
 
-This plugin utilizes searches results found in a JSON file; here's a basic example:
+This plugin utilizes JSON data; here's a simple example:
 
 ```json
 [{
@@ -79,7 +79,7 @@ This plugin utilizes searches results found in a JSON file; here's a basic examp
 }]
 ```
 
-The structure of your JSON _can_ be more complex; for example, see the demo's [search.json](https://github.com/mhulse/jquery-bigglesworth/blob/gh-pages/demo/search.json).
+The structure of your JSON _can_ be more complex than the above; for a more robust example, see the demo's [search.json](https://github.com/mhulse/jquery-bigglesworth/blob/gh-pages/demo/search.json).
 
 ### Javascript:
 
