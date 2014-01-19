@@ -34,7 +34,7 @@ There are several ways to install this code:
 1. Download as a [`zip`](https://github.com/mhulse/jquery-bigglesworth/archive/gh-pages.zip).
 1. Clone it: `$ git clone https://github.com/mhulse/jquery-bigglesworth.git`.
 1. Fork it and clone: `$ git clone git@github.com:USERNAME/jquery-bigglesworth.git`.
-1. Just grab the relevant [JS](https://raw.github.com/mhulse/jquery-bigglesworth/gh-pages/ion/jquery.ion.js) ([uglified](https://raw.github.com/mhulse/jquery-bigglesworth/gh-pages/ion/jquery.ion.min.js)) files.
+1. Just grab the relevant [JS](https://raw.github.com/mhulse/jquery-bigglesworth/gh-pages/bigglesworth/jquery.bigglesworth.js) ([uglified](https://raw.github.com/mhulse/jquery-bigglesworth/gh-pages/bigglesworth/jquery.bigglesworth.min.js)) files.
 1. Using [Bower](http://bower.io/): `$ bower install https://github.com/mhulse/jquery-bigglesworth.git`.
 
 ## Usage
@@ -59,7 +59,7 @@ The basic markup should consist of a `<form>` with a (search) `<input>`:
 </form>
 ```
 
-**Note:** When there are no results, or if results aren't found, the form's default action will be used; in the above case, a simple [Google site search](https://developers.google.com/search-appliance/documentation/46/xml_reference#request_parameters) will be called.
+**Note:** When there are no results, or if the search term(s) isn't found found, the form's default action will be used upon submission; in the above example, a simple [Google site search](https://developers.google.com/search-appliance/documentation/46/xml_reference#request_parameters) will be called.
 
 ### Styling:
 
@@ -79,7 +79,7 @@ Put [jQuery](http://jquery.com/) on your page:
 <script src="jquery.bigglesworth.min.js"></script>
 ```
 
-Next, Ion can be instantiated like so:
+Next, Bigglesworth can be instantiated like so:
 
 ```html
 <script>
