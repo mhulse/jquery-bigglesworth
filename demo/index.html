@@ -41,6 +41,35 @@
 					background-clip: padding-box;
 		}
 		
+		/* Demo: */
+		
+		#search { position: relative; }
+		
+		#bigglesworth_results,
+		#bigglesworth_results-no {
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: auto;
+			left: 0;
+			width: 100%;
+			z-index: 100;
+		}
+		
+		#bigglesworth_results li {
+			border: 1px solid #ddd;
+			background: rgba(255, 255, 255, .9);
+			margin: 0 0 -1px;
+			padding: 10px;
+			list-style: none;
+		}
+		
+		#bigglesworth_results-no p {
+			border: 1px solid #ddd;
+			margin: 0;
+			padding: 10px;
+		}
+		
 	</style>
 	
 </head>
@@ -51,11 +80,23 @@
 		<input type="hidden" name="sitesearch" value="mky.io">
 		
 		<label><span>Search:</span> <input id="query" type="search" name="q" placeholder="Search &hellip;" autocomplete="off"></label>
-
+		
 	</form>
 	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="../bigglesworth/jquery.bigglesworth.min.js"></script>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+	
+	<p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+	
+	<p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+	
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+	
+	<p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+	
+	<p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="../bigglesworth/jquery.bigglesworth.js"></script>
 	
 	<script>
 		
@@ -68,21 +109,17 @@
 			// 	data.results.append('foo');
 			// };
 			
-			// @todo Custom `format()` function (need dates).
-			// @todo Need area to spit out "not found" message (vs. use same area as results).
-			// @todo Hide the not found and results areas when empty.
-			// @todo Show animated ... when typing/waiting for things.
-			// @todo Results animation fade-in/out?
-			var $ul = $('<ul>', { id : 'results' }),
+			var $ul = $('<ul>', { id : 'bigglesworth_results' }),
+			    $p = $('<div>', { id : 'bigglesworth_results-no' }),
 			    $search = $('#query');
 			
 			$search
 				.closest('label')
-				.after($ul);
+				.after($p, $ul);
 			
 			$search.bigglesworth({
-				template : '<li><a href="{ href }">{ title }</a></li>',
-				zilch : '<li><i aria-hidden="true" class="fa fa-times-circle"></i> Nothing found.</li>'
+				resultsTemplate : '<li><a href="{ href }">{ title }</a></li>',
+				resultsNoTemplate : '<p>Nothing found.</p>'
 			});
 			
 		});

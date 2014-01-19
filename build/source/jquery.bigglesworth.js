@@ -14,13 +14,19 @@
 	
 	defaults = {
 		
-		results : '#results',
+		results : '#' + NS + '_results',
+		resultsTemplate : '<p><a href="{ href }">{ title }</a></p>',
+		resultsNo : '#' + NS + '_results-no',
+		resultsNoTemplate : '<p>Oh shucks, nothing found :(</p>',
 		feed : 'search.json',
-		template : '<p><a href="{ href }">{ title }</a></p>',
-		zilch : '<p>Oh shucks<br/><small>Nothing found :(</small></p>',
+		limit : 5,
 		buffer : 300,
 		onInit : $.noop,
-		onAfterInit : $.noop
+		onAfterInit : $.noop,
+		onBeforeAdd      : $.noop,                              // Before reveal animation begins.
+		onAdd            : $.noop,                              // After reveal animation ends.
+		onBeforeRemove      : $.noop,                              // Before hide animation begins.
+		onRemove            : $.noop                               // After hide animation ends.
 		
 	},
 	
@@ -40,12 +46,13 @@
 					
 					$this.data(NS, {
 						
-						init     : false,
-						settings : settings,
-						target   : $this,
-						results  : $(settings.results),
-						matches  : [],
-						json     : null
+						init      : false,
+						settings  : settings,
+						target    : $this,
+						results   : $(settings.results),
+						resultsNo : $(settings.resultsNo),
+						matches   : [],
+						json      : null
 						
 					});
 					
@@ -94,7 +101,7 @@
 		
 		data.settings.onInit.call(data.target);
 		
-		if (data.results.length) {
+		if (data.results.length && data.resultsNo.length) {
 			
 			data.target
 				.one('focus', function() {
@@ -104,7 +111,7 @@
 							
 							data.json = obj;
 							
-							_registerEvent(data);
+							_register(data);
 							
 						})
 						.fail(function(jqxhr, textStatus, error) {
@@ -123,7 +130,7 @@
 			
 		} else {
 			
-			console.warn('jQuery.' + NS, 'can\'t find a "results" element for', data.target);
+			console.warn('jQuery.%s can\'t find either a "results" (%o) or "resultsNo" (%o) elements for %o.', NS, data.results, data.resultsNo, data.target);
 			
 		}
 		
@@ -131,7 +138,7 @@
 		
 	},
 	
-	_registerEvent = function(data) {
+	_register = function(data) {
 		
 		var timer;
 		
@@ -154,14 +161,14 @@
 				
 				if (q.length) {
 					
-					_writeMatches(
+					_write(
 						data,
-						_performSearch(data, q)
+						_search(data, q)
 					);
 					
 				} else {
 					
-					_clearSearchResults(data);
+					_nuke(data);
 					
 				}
 				
@@ -171,7 +178,7 @@
 		
 	},
 	
-	_performSearch = function(data, str) {
+	_search = function(data, str) {
 		
 		var obj,
 		    i,
@@ -195,16 +202,16 @@
 		
 	},
 	
-	_writeMatches = function(data, m) {
+	_write = function(data, m) {
 		
 		var i,
 		    l;
 		
-		_clearSearchResults(data);
+		_nuke(data);
 		
 		if (m && m.length) {
 			
-			for (i = 0, l = m.length; (i < l) && (i < 10); i++) { // 10 = limit.
+			for (i = 0, l = m.length; (i < l) && (i < data.settings.limit); i++) { // 10 = limit.
 				
 				$.fn[NS].format(data, m[i]);
 				
@@ -255,10 +262,17 @@
 		
 	},
 	
-	_clearSearchResults = function(data) {
+	_nuke = function(data) {
 		
 		data.matches = [];
-		data.results.children().remove();
+		
+		data.results
+			.children()
+			.remove();
+		
+		data.resultsNo
+			.children()
+			.remove();
 		
 	};
 	
@@ -281,22 +295,20 @@
 	};
 	
 	$.fn[NS].format = function(data, obj) {
+					
+		var item = data.settings.resultsTemplate.replace(/\{(.*?)\}/g, function(match, property) {
+			
+			return obj[$.trim(property)];
+			
+		});
 		
-		data.results.append(
-			
-			data.settings.template.replace(/\{(.*?)\}/g, function(match, property) {
-				
-				return obj[$.trim(property)];
-				
-			})
-			
-		);
+		data.results.append(item);
 		
 	};
 	
 	$.fn[NS].zilch = function(data) {
 		
-		data.results.append(data.settings.zilch);
+		data.resultsNo.append(data.settings.resultsNoTemplate);
 		
 	};
 	
