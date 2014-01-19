@@ -178,7 +178,7 @@ Option | Description | Default
  	data.resultsNo.append(
  		'<p>' +
  			'Nothing recent found.' +
- 			'<br>' + 
+ 			'<br>' +
  			'<a id="submit" href="#">Search google instead?</a>' +
  		'</p>'
  	);
@@ -191,7 +191,7 @@ Option | Description | Default
  		
  	});
  	
- }
+ };
  ```
 
  In the above example, I've added a link to ask users if they want to continue searching via Google.
