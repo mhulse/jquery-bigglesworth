@@ -14,7 +14,7 @@ A simple "instant search" plugin, powered by jQuery.
 
 ### Inspired by:
 
-* **[Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)**
+* **[Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)** (**BIG UPS** goes out to [@christian-fei](https://github.com/christian-fei)!)
 * [Simple Jekyll Searching](https://alexpearce.me/2012/04/simple-jekyll-searching/)
 * [Fulltext Search on Jekyll Site](http://blog.comperiosearch.com/blog/2012/06/27/make-an-instant-search-application-using-json-ajax-and-jquery/)
 * [jekyll-lunr-js-search](https://github.com/slashdotdash/jekyll-lunr-js-search)
