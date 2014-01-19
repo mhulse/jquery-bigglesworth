@@ -114,6 +114,26 @@
 				
 			};
 			
+			$.fn.bigglesworth.zilch = function(data) {
+				
+				data.resultsNo.append(
+					'<p>' +
+						'Nothing recent found.' +
+						'<br>' + 
+						'<a id="submit" href="#">Search google instead?</a>' +
+					'</p>'
+				);
+				
+				$('#submit').on('click', function($e) {
+					
+					$e.preventDefault();
+					
+					data.form[0].submit();
+					
+				});
+				
+			}
+			
 			var $ul = $('<ul>', { id : 'bigglesworth_results' }),
 			    $p = $('<div>', { id : 'bigglesworth_results-no' }),
 			    $search = $('#query');
@@ -123,9 +143,21 @@
 				.after($p, $ul);
 			
 			$search.bigglesworth({
-				//resultsTemplate : '<li><a href="{ href }">{ title }</a></li>',
-				resultsNoTemplate : '<p>Nothing found.</p>'
+				results           : '#bigglesworth_results',
+				resultsTemplate   : '<p><a href="{ href }">{ title }</a></p>',
+				resultsNo         : '#bigglesworth_results-no',
+				resultsNoTemplate : '<p>Nothing recent found.</p>',
+				feed              : 'search.json',
+				limit             : 5,
+				buffer            : 300,
+				onInit            : function(data) { console.log('onInit:', $(this), data); },
+				onAfterInit       : function(data) { console.log('onAfterInit:', $(this), data); },
+				onResult          : function(obj, item, data) { console.log('onResult:', $(this), obj, item, data); },
+				onRemove          : function(el, children, data) { console.log('onRemove:', $(this), el, children, data); },
+				onZilch           : function(data) { console.log('onZilch:', $(this), data); }
 			});
+			
+			//$search.bigglesworth('destroy');
 			
 		});
 		
