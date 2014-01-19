@@ -147,6 +147,16 @@ Option | Description | Default
 
 ### Advanced:
 
+1. All options can be overidden via an [HTML5 data attribute](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes) named `data-bigglesworth-options`; the value of this attribute **must** be valid [JSON](http://json.org/) syntax.
+
+ For example:
+
+ ```html
+ <input id="bigglesworth" type="search" name="q" placeholder="Search &hellip;" autocomplete="off" data-bigglesworth-options='{ "feed" : "/search.json" }'>
+ ```
+
+ **Note** the nesting order of the single (`'`) and double (`"`) quotes.
+
 1. Format each result using the `format` method.
 
  Example:
