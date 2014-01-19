@@ -4,10 +4,10 @@
  *
  * @author Micky Hulse
  * @link http://mky.io
- * @docs https://github.com/mhulse/bigglesworth
+ * @docs https://github.com/mhulse/jquery-bigglesworth
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
- * @version 0.1.0
+ * @version 1.0.0
  * @date 2014/01/19
  */
 
@@ -71,7 +71,7 @@
 	defaults = {
 		
 		results           : '#' + NS + '_results',                     // Target results element.
-		resultsTemplate   : '<p><a href="{ href }">{ title }</a></p>', // Results HTML "template".
+		resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // Results HTML "template".
 		resultsNo         : '#' + NS + '_results-no',                  // Target "no" results element.
 		resultsNoTemplate : '<p>Nothing recent found.</p>',            // No results HTML template.
 		feed              : 'search.json',                             // The search data file.
@@ -400,7 +400,7 @@
 						// Yes, so navigate to first result:
 						//----------------------------------
 						
-						window.location = data.matches[0].href; // On ENTER, goes to first result's "url".
+						window.location = data.matches[0].uri; // On ENTER, goes to first result's "url".
 						
 					} else {
 						

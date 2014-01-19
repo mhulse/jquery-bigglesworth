@@ -58,7 +58,7 @@
 	defaults = {
 		
 		results           : '#' + NS + '_results',                     // Target results element.
-		resultsTemplate   : '<p><a href="{ href }">{ title }</a></p>', // Results HTML "template".
+		resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // Results HTML "template".
 		resultsNo         : '#' + NS + '_results-no',                  // Target "no" results element.
 		resultsNoTemplate : '<p>Nothing recent found.</p>',            // No results HTML template.
 		feed              : 'search.json',                             // The search data file.
@@ -387,7 +387,7 @@
 						// Yes, so navigate to first result:
 						//----------------------------------
 						
-						window.location = data.matches[0].href; // On ENTER, goes to first result's "url".
+						window.location = data.matches[0].uri; // On ENTER, goes to first result's "url".
 						
 					} else {
 						

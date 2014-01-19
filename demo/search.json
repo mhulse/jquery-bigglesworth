@@ -2,7 +2,7 @@
   "title"    : "When Mr. Bigglesworth gets upset... people DIE!",
   "category" : ["frickin"],
   "tags"     : ["evil", "swing", "baby", "yeah"],
-  "href"     : "/when-mr-bigglesworth-gets-upset-people-die/",
+  "uri"      : "/when-mr-bigglesworth-gets-upset-people-die/",
   "date"     : {
     "day"    : "05",
     "month"  : "January",
@@ -12,7 +12,7 @@
   "title"    : "It's frickin' freezing in here, Mr. Bigglesworth.",
   "category" : ["frickin"],
   "tags"     : ["evil"],
-  "href"     : "/its-frickin-freezing-in-here-mr-bigglesworth/",
+  "uri"      : "/its-frickin-freezing-in-here-mr-bigglesworth/",
   "date"     : {
     "day"    : "05",
     "month"  : "January",
@@ -22,7 +22,7 @@
   "title"    : "Close the tank!",
   "category" : ["tank"],
   "tags"     : ["underground", "lair"],
-  "href"     : "/close-the-tank/",
+  "uri"      : "/close-the-tank/",
   "date"     : {
     "day"    : "05",
     "month"  : "January",
@@ -32,7 +32,7 @@
   "title"    : "I want you to meet daddy's nemesis, Austin Powers.",
   "category" : ["daddy"],
   "tags"     : ["nemesis", "powers"],
-  "href"     : "/i-want-you-to-meet-daddys-nemesis-austin-powers/",
+  "uri"      : "/i-want-you-to-meet-daddys-nemesis-austin-powers/",
   "date"     : {
     "day"    : "05",
     "month"  : "January",
@@ -42,7 +42,7 @@
   "title"    : "Scott, that hurts daddy when you say that. Honestly.",
   "category" : ["scott"],
   "tags"     : ["daddy", "hurts"],
-  "href"     : "/scott-that-hurts-daddy-when-you-say-that-honestly/",
+  "uri"      : "/scott-that-hurts-daddy-when-you-say-that-honestly/",
   "date"     : {
     "day"    : "05",
     "month"  : "January",
@@ -52,7 +52,7 @@
   "title"    : "I like to see girls of that... caliber.",
   "category" : ["girls"],
   "tags"     : ["see", "caliber", "like"],
-  "href"     : "/i-like-to-see-girls-of-that-caliber/",
+  "uri"      : "/i-like-to-see-girls-of-that-caliber/",
   "date"     : {
     "day"    : "22",
     "month"  : "December",
@@ -62,7 +62,7 @@
   "title"    : "His name? Number Two.",
   "category" : ["name"],
   "tags"     : ["man", "evil", "two"],
-  "href"     : "/his-name-number-two/",
+  "uri"      : "/his-name-number-two/",
   "date"     : {
     "day"    : "21",
     "month"  : "December",
@@ -72,7 +72,7 @@
   "title"    : "There's nothing as pathetic as an aging hipster.",
   "category" : ["aging"],
   "tags"     : ["evil", "hipster", "pathetic"],
-  "href"     : "/theres-nothing-as-pathetic-as-an-aging-hipster/",
+  "uri"      : "/theres-nothing-as-pathetic-as-an-aging-hipster/",
   "date"     : {
     "day"    : "11",
     "month"  : "November",

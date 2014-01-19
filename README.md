@@ -65,6 +65,22 @@ The basic markup should consist of a `<form>` with a (search) `<input>`:
 
 The search elements, and results, can be styled as you see fit; check out the [demo page](http://mhulse.github.com/jquery-bigglesworth/demo/) for a complete working example.
 
+### JSON:
+
+This plugin utilizes searches results found in a JSON file; here's a basic example:
+
+```json
+[{
+  "title" : "When Mr. Bigglesworth gets upset... people DIE!",
+  "uri" : "/when-mr-bigglesworth-gets-upset-people-die/"
+},{
+  "title" : "It's frickin' freezing in here, Mr. Bigglesworth.",
+  "uri" : "/its-frickin-freezing-in-here-mr-bigglesworth/",
+}]
+```
+
+The structure of your JSON _can_ be more complex; for example, see the demo's [search.json](https://github.com/mhulse/jquery-bigglesworth/blob/gh-pages/demo/search.json).
+
 ### Javascript:
 
 Put [jQuery](http://jquery.com/) on your page:
@@ -98,7 +114,7 @@ Here's an example with all the options:
 ```html
 $('#bigglesworth').bigglesworth({
 	results           : '#bigglesworth_results',
-	resultsTemplate   : '<p><a href="{ href }">{ title }</a></p>',
+	resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>',
 	resultsNo         : '#bigglesworth_results-no',
 	resultsNoTemplate : '<p>Nothing recent found.</p>',
 	feed              : 'search.json',
@@ -117,7 +133,7 @@ $('#bigglesworth').bigglesworth({
 Option | Description | Default
 :-- | :-- | :--
 `results` | Target results element. | `'#bigglesworth_results'`
-`resultsTemplate` | Results HTML "template". | `'<p><a href="{ href }">{ title }</a></p>'`
+`resultsTemplate` | Results HTML "template". | `'<p><a href="{ uri }">{ title }</a></p>'`
 `resultsNo` | Target "no" results element. | `'#bigglesworth_results-no'`
 `resultsNoTemplate` | No results HTML template. | `'<p>Nothing recent found.</p>'`
 `feed` | The search data file. | `'search.json'`
@@ -141,7 +157,7 @@ Option | Description | Default
  	data.results.append(
  		'<li>' +
  			obj.date.month + ' ' + obj.date.day + ', ' + obj.date.year + ' | ' +
- 			'<a href="' + obj.href + '">' +
+ 			'<a href="' + obj.uri + '">' +
  				obj.title +
  			'</a>' +
  		'</li>'

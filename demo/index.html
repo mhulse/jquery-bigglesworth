@@ -106,7 +106,7 @@
 				data.results.append(
 					'<li>' +
 						obj.date.month + ' ' + obj.date.day + ', ' + obj.date.year + ' | ' +
-						'<a href="' + obj.href + '">' +
+						'<a href="' + obj.uri + '">' +
 							obj.title +
 						'</a>' +
 					'</li>'
@@ -144,7 +144,7 @@
 			
 			$search.bigglesworth({
 				results           : '#bigglesworth_results',
-				resultsTemplate   : '<p><a href="{ href }">{ title }</a></p>',
+				resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>',
 				resultsNo         : '#bigglesworth_results-no',
 				resultsNoTemplate : '<p>Nothing recent found.</p>',
 				feed              : 'search.json',
