@@ -202,12 +202,12 @@ Option | Description | Default
 
  ```js
  var $ul = $('<ul>', { id : 'bigglesworth_results' }),
-     $p = $('<div>', { id : 'bigglesworth_results-no' }),
-     $search = $('#bigglesworth');
+ $div = $('<div>', { id : 'bigglesworth_results-no' }),
+ $search = $('#bigglesworth');
  
  $search
  	.closest('label')
- 	.after($p, $ul);
+ 	.after($div, $ul);
  
  $search.bigglesworth();
  ```
