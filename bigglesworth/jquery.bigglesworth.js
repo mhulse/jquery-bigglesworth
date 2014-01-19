@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 0.1.0
- * @date 2014/01/15
+ * @date 2014/01/18
  */
 
 /* jshint -W083, unused: vars */
@@ -157,7 +157,7 @@
 				
 				if ($e.which === 13) {
 					
-					if (data.matches) {
+					if (data.matches.length) {
 						
 						window.location = data.matches[0].href; // On ENTER, goes to first result's "url".
 						
@@ -270,6 +270,7 @@
 	
 	_clearSearchResults = function(data) {
 		
+		data.matches = [];
 		data.results.children().remove();
 		
 	};

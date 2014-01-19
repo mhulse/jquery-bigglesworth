@@ -144,7 +144,7 @@
 				
 				if ($e.which === 13) {
 					
-					if (data.matches) {
+					if (data.matches.length) {
 						
 						window.location = data.matches[0].href; // On ENTER, goes to first result's "url".
 						
@@ -257,6 +257,7 @@
 	
 	_clearSearchResults = function(data) {
 		
+		data.matches = [];
 		data.results.children().remove();
 		
 	};

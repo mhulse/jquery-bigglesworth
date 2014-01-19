@@ -10,7 +10,36 @@
 	
 	<style>
 		
+		*,
+		*::before,
+		*::after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
 		
+		body { padding: 20px; }
+		
+		label span { display: none; }
+		
+		input[type="search"] {
+			font-size: 18px;
+			width: 100%;
+			padding: 20px 10px;
+			display: block;
+			box-shadow: inset 0 1px 3px #ccc;
+			border-radius: 0;
+			border: 1px solid #ddd;
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+			        box-sizing: border-box;
+			-webkit-appearance: none;
+			   -moz-appearance: none;
+			        appearance: none;
+			-webkit-background-clip: padding;
+			   -moz-background-clip: padding;
+					background-clip: padding-box;
+		}
 		
 	</style>
 	
@@ -21,7 +50,7 @@
 		
 		<input type="hidden" name="sitesearch" value="mky.io">
 		
-		<label>Search: <input id="query" type="search" name="q" placeholder="&hellip; search &hellip;" autocomplete="off"></label>
+		<label><span>Search:</span> <input id="query" type="search" name="q" placeholder="Search &hellip;" autocomplete="off"></label>
 
 	</form>
 	
