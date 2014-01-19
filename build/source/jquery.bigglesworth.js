@@ -4,6 +4,8 @@
 // https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/simpleJekyllSearch.js
 // https://github.com/alexpearce/alexpearce.github.com/blob/master/assets/js/alexpearce.js
 // http://stackoverflow.com/a/11335081/922323
+// http://stackoverflow.com/a/722732/922323
+// http://stackoverflow.com/a/14889628/922323
 (function($, window, document, undefined) {
 	
 	'use strict';
@@ -42,13 +44,14 @@
 				
 				if ( ! data) {
 					
-					settings  = $.extend(true, {}, defaults, options, $this.data(NS + 'Options'));
+					settings = $.extend(true, {}, defaults, options, $this.data(NS + 'Options'));
 					
 					$this.data(NS, {
 						
 						init      : false,
 						settings  : settings,
 						target    : $this,
+						form      : $this.closest('form'),
 						results   : $(settings.results),
 						resultsNo : $(settings.resultsNo),
 						matches   : [],
@@ -120,8 +123,9 @@
 							
 						});
 				
-				})
-				.closest('form')
+				});
+			
+			data.form
 				.submit(function($e) {
 					
 					$e.preventDefault();
@@ -155,6 +159,11 @@
 						
 						window.location = data.matches[0].href; // On ENTER, goes to first result's "url".
 						
+					} else {
+						
+						data.form[0]
+							.submit();
+						
 					}
 					
 				}
@@ -168,7 +177,9 @@
 					
 				} else {
 					
-					_nuke(data);
+					data.matches = [];
+					
+					$.fn[NS].nuke(data);
 					
 				}
 				
@@ -207,11 +218,11 @@
 		var i,
 		    l;
 		
-		_nuke(data);
+		$.fn[NS].nuke(data);
 		
 		if (m && m.length) {
 			
-			for (i = 0, l = m.length; (i < l) && (i < data.settings.limit); i++) { // 10 = limit.
+			for (i = 0, l = m.length; (i < l) && (i < data.settings.limit); i++) {
 				
 				$.fn[NS].format(data, m[i]);
 				
@@ -225,8 +236,6 @@
 		
 	},
 	
-	// http://stackoverflow.com/a/722732/922323
-	// http://stackoverflow.com/a/14889628/922323
 	_traverse = function(obj, str) {
 		
 		var flag = false,
@@ -260,20 +269,6 @@
 		
 		return flag;
 		
-	},
-	
-	_nuke = function(data) {
-		
-		data.matches = [];
-		
-		data.results
-			.children()
-			.remove();
-		
-		data.resultsNo
-			.children()
-			.remove();
-		
 	};
 	
 	$.fn[NS] = function(method) {
@@ -303,6 +298,18 @@
 		});
 		
 		data.results.append(item);
+		
+	};
+	
+	$.fn[NS].nuke = function(data) {
+		
+		data.results
+			.children()
+			.remove();
+		
+		data.resultsNo
+			.children()
+			.remove();
 		
 	};
 	
