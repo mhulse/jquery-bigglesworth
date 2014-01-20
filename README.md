@@ -238,10 +238,12 @@ Please read the [CONTRIBUTING.md](https://github.com/mhulse/jquery-bigglesworth/
 
 ## Changelog
 
+* [v1.1.0 milestones](https://github.com/mhulse/jquery-bigglesworth/issues?direction=desc&milestone=2&page=1&sort=updated&state=open)
 * [v1.0.0 milestones](https://github.com/mhulse/jquery-bigglesworth/issues?direction=desc&milestone=1&page=1&sort=updated&state=open)
 
 ## [Release history](https://github.com/mhulse/jquery-bigglesworth/releases)
 
+* 2014-01-19   [v1.1.0](https://github.com/mhulse/jquery-bigglesworth/releases/tag/v1.1.0)   More hooks.
 * 2014-01-19   [v1.0.0](https://github.com/mhulse/jquery-bigglesworth/releases/tag/v1.0.0)   Ready for prime time.
 * 2014-01-16   [v0.1.0](https://github.com/mhulse/jquery-bigglesworth/releases/tag/v0.1.0)   Hello world!
 
