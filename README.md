@@ -132,20 +132,20 @@ $('#bigglesworth').bigglesworth({
 
 Option | Description | Default
 :-- | :-- | :--
-`results` | Target results element. | `'#bigglesworth_result'`
-`resultsTemplate` | Results HTML "template". | `'<p><a href="{ uri }">{ title }</a></p>'`
-`resultsNo` | Target "no" results element. | `'#bigglesworth_result-no'`
-`resultsNoTemplate` | No results HTML template. | `'<p>Nothing recent found.</p>'`
-`classOn` | Class applied to result when results exist. | `'bigglesworth_on'`
-`classOff` | Class applied to result when results do not exist. | `'bigglesworth_off'`
-`feed` | The search data file. | `'search.json'`
-`limit` | Result limit. | `5`
-`buffer` | Search buffer. | `300`
+`results` | Target "result" element. | `'#bigglesworth_result'`
+`resultsTemplate` | HTML "template" for "result" element. | `'<p><a href="{ uri }">{ title }</a></p>'`
+`resultsNo` | Target "no result" element. | `'#bigglesworth_result-no'`
+`resultsNoTemplate` | HTML template for "no result". | `'<p>Nothing recent found.</p>'`
+`classOn` | Class applied to parent element when "result" exists. | `'bigglesworth_on'`
+`classOff` | Class applied to parent element when "result" does not exist. | `'bigglesworth_off'`
+`feed` | The "search" data file. | `'search.json'`
+`limit` | Limit of "result" output. | `5`
+`buffer` | Buffer "search" output. | `300`
 `onInit` | Callback on plugin initialization. | `$.noop`
 `onAfterInit` | Callback after plugin initialization. | `$.noop`
-`onResult` | Callback when result added. | `$.noop`
-`onRemove` | Callback when result removed. | `$.noop`
-`onZilch` | Callback for no results. | `$.noop`
+`onResult` | Callback when a "result" has been added. | `$.noop`
+`onRemove` | Callback when a "result" has been removed. | `$.noop`
+`onZilch` | Callback when search query returns no "result". | `$.noop`
 
 ### Advanced:
 

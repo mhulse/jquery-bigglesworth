@@ -74,20 +74,20 @@
 	
 	defaults = {
 		
-		result           : '#' + NS + '_results',                    // Target result element.
-		resultTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // Result HTML "template".
-		resultNo         : '#' + NS + '_results-no',                 // Target "no" result element.
-		resultNoTemplate : '<p>Nothing recent found.</p>',           // No result HTML template.
-		classOn          : NS + '_on',                               // Class applied to result when results exist.
-		classOff         : NS + '_off',                              // Class applied to result when results do not exist.
-		feed             : 'search.json',                            // The search data file.
-		limit            : 5,                                        // Result limit.
-		buffer           : 300,                                      // Search buffer.
+		result           : '#' + NS + '_result',                     // Target "result" element.
+		resultTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // HTML "template" for "result" element.
+		resultNo         : '#' + NS + '_result-no',                  // Target "no result" element.
+		resultNoTemplate : '<p>Nothing recent found.</p>',           // HTML template for "no result".
+		classOn          : NS + '_on',                               // Class applied to parent element when "result" exists.
+		classOff         : NS + '_off',                              // Class applied to parent element when "result" does not exist.
+		feed             : 'search.json',                            // The "search" data file.
+		limit            : 5,                                        // Limit of "result" output.
+		buffer           : 300,                                      // Buffer "search" output.
 		onInit           : $.noop,                                   // Callback on plugin initialization.
 		onAfterInit      : $.noop,                                   // Callback after plugin initialization.
-		onResult         : $.noop,                                   // Callback when result added.
-		onRemove         : $.noop,                                   // Callback when result removed.
-		onZilch          : $.noop                                    // Callback for no results.
+		onResult         : $.noop,                                   // Callback when a "result" has been added.
+		onRemove         : $.noop,                                   // Callback when a "result" has been removed.
+		onZilch          : $.noop                                    // Callback when search query returns no "result".
 		
 	}, // defaults
 	
@@ -146,9 +146,9 @@
 						settings : settings,              // Merged plugin settings.
 						target   : $this,                 // Target element plugin has been initialized on (assumed to be a form `input` element).
 						form     : $this.closest('form'), // The `input`'s parent `form`.
-						result   : $(settings.result),    // Result target element.
-						resultNo : $(settings.resultNo),  // No result target element.
-						matches  : [],                    // Container for `query`'s matched result.
+						result   : $(settings.result),    // Target element "result".
+						resultNo : $(settings.resultNo),  // Target element "no result".
+						matches  : [],                    // Container for `query`'s matched "result".
 						query    : '',                    // Search terms.
 						json     : null                   // The parsed data returned from JSON feed.
 						
@@ -256,8 +256,8 @@
 					// Remove classes:
 					//----------------------------------
 					
-					data.result // Take result jQuery object ...
-						.add(data.resultNo) // ... add the "no" result jQuery object ...
+					data.result // Take "result" jQuery object ...
+						.add(data.resultNo) // ... add the "no result" jQuery object ...
 						.removeClass(data.settings.classOn) // ... and remove ...
 						.removeClass(data.settings.classOff); // ... classes. :)
 					
@@ -367,7 +367,7 @@
 			// Ouch!
 			//----------------------------------
 			
-			console.warn('jQuery.%s can\'t find either a "results" (%o) or "resultsNo" (%o) elements for %o.', NS, data.result, data.resultNo, data.target);
+			console.warn('jQuery.%s can\'t find either a "result" (%o) or "resultNo" (%o) elements for %o.', NS, data.result, data.resultNo, data.target);
 			
 		}
 		
@@ -421,16 +421,16 @@
 				if ($e.which === 13) {
 					
 					//----------------------------------
-					// Do we have results?
+					// Do we have a "result"?
 					//----------------------------------
 					
 					if (data.matches.length) {
 						
 						//----------------------------------
-						// Yes, so navigate to first result:
+						// Yes. Navigate to first "result":
 						//----------------------------------
 						
-						window.location = data.matches[0].uri; // On ENTER, goes to first result's "uri".
+						window.location = data.matches[0].uri; // On ENTER, goes to first "result"'s "uri".
 						
 					} else {
 						
@@ -452,12 +452,12 @@
 				if (data.query.length) {
 					
 					//----------------------------------
-					// Yup, so spit out the results:
+					// Yup, so spit out the "result":
 					//----------------------------------
 					
 					_write(
 						data,
-						_search(data) // Return results of `_search()` back to `_write()`.
+						_search(data) // Return "result" of `_search()` back to `_write()`.
 					);
 					
 				} else {
@@ -466,13 +466,13 @@
 					// Juggle classes ...
 					//----------------------------------
 					
-					data.result // Take result jQuery object ...
-						.add(data.resultNo) // ... add the "no" result jQuery object ...
+					data.result // Take "result" jQuery object ...
+						.add(data.resultNo) // ... add the "no result" jQuery object ...
 						.removeClass(data.settings.classOn) // ... add one class ...
 						.addClass(data.settings.classOff); // ... and remove the other class.
 					
 					//----------------------------------
-					// No, so clear the matched results:
+					// No. Clear the matched "result":
 					//----------------------------------
 					
 					data.matches = [];
@@ -497,7 +497,7 @@
 	 * @private
 	 * @type { function }
 	 * @param { object } data Parent data object literal.
-	 * @return { object } Matched results.
+	 * @return { object } Matched "result".
 	 */
 	
 	_search = function(data) {
@@ -578,19 +578,19 @@
 		$.fn[NS].nuke(data);
 		
 		//----------------------------------
-		// Results?
+		// Do we have a "result"?
 		//----------------------------------
 		
 		if (matches && matches.length) {
 			
 			//----------------------------------
-			// Yup, loop over each result:
+			// Yup, loop over each "result":
 			//----------------------------------
 			
 			for (i = 0, l = matches.length; (i < l) && (i < data.settings.limit); i++) {
 				
 				//----------------------------------
-				// Format result:
+				// Format "result":
 				//----------------------------------
 				
 				$.fn[NS].format(data, matches[i]);
@@ -612,7 +612,7 @@
 		} else {
 			
 			//----------------------------------
-			// Display "no results" message:
+			// Display "no result" message:
 			//----------------------------------
 			
 			$.fn[NS].zilch(data);
@@ -751,7 +751,7 @@
 	//--------------------------------------------------------------------
 	
 	/**
-	 * Formats the output of a result.
+	 * Format the output of a "result".
 	 *
 	 * @type { function }
 	 */
@@ -759,7 +759,7 @@
 	$.fn[NS].format = function(data, obj) {
 		
 		//----------------------------------
-		// Combine result and template:
+		// Combine "result" and template:
 		//----------------------------------
 		
 		var item = data.settings.resultTemplate.replace(/\{(.*?)\}/g, function(match, property) {
@@ -768,7 +768,7 @@
 			// Return property if it exists:
 			//----------------------------------
 			
-			return obj[$.trim(property)];
+			return obj[$.trim(property)]; // @todo Allow for nesting?
 			
 		});
 		
@@ -779,7 +779,7 @@
 		data.settings.onResult.call(data.target, obj, item, data);
 		
 		//----------------------------------
-		// Add formatted result to DOM:
+		// Add formatted "result" to DOM:
 		//----------------------------------
 		
 		data.result.append(item);
@@ -789,7 +789,7 @@
 	//--------------------------------------------------------------------
 	
 	/**
-	 * Displays no result message.
+	 * Displays "no result" message.
 	 *
 	 * @type { function }
 	 */
@@ -803,7 +803,7 @@
 		data.settings.onZilch.call(data.target, data);
 		
 		//----------------------------------
-		// Add "no results" template to DOM:
+		// Add template to DOM:
 		//----------------------------------
 		
 		data.resultNo.append(data.settings.resultNoTemplate);
@@ -813,7 +813,7 @@
 	//--------------------------------------------------------------------
 	
 	/**
-	 * Removes result from output.
+	 * Removes "result" from output.
 	 *
 	 * @type { function }
 	 */
@@ -821,7 +821,7 @@
 	$.fn[NS].nuke = function(data) {
 		
 		//----------------------------------
-		// Loop over "result" objects:
+		// Loop over objects:
 		//----------------------------------
 		
 		$.each([data.result, data.resultNo], function() {
