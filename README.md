@@ -52,9 +52,9 @@ The basic markup should consist of a `<form>` with a (search) `<input>`:
 	
 	<label><span>Search:</span> <input id="bigglesworth" type="search" name="q" placeholder="Search &hellip;" autocomplete="off"></label>
 	
-	<ul id="bigglesworth_results"></ul>
+	<ul id="bigglesworth_result"></ul>
 	
-	<div id="bigglesworth_results-no"></div>
+	<div id="bigglesworth_result-no"></div>
 	
 </form>
 ```
@@ -113,9 +113,9 @@ Here's an example with all the options:
 
 ```html
 $('#bigglesworth').bigglesworth({
-	results           : '#bigglesworth_results',
+	results           : '#bigglesworth_result',
 	resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>',
-	resultsNo         : '#bigglesworth_results-no',
+	resultsNo         : '#bigglesworth_result-no',
 	resultsNoTemplate : '<p>Nothing recent found.</p>',
 	feed              : 'search.json',
 	limit             : 5,
@@ -132,10 +132,12 @@ $('#bigglesworth').bigglesworth({
 
 Option | Description | Default
 :-- | :-- | :--
-`results` | Target results element. | `'#bigglesworth_results'`
+`results` | Target results element. | `'#bigglesworth_result'`
 `resultsTemplate` | Results HTML "template". | `'<p><a href="{ uri }">{ title }</a></p>'`
-`resultsNo` | Target "no" results element. | `'#bigglesworth_results-no'`
+`resultsNo` | Target "no" results element. | `'#bigglesworth_result-no'`
 `resultsNoTemplate` | No results HTML template. | `'<p>Nothing recent found.</p>'`
+`classOn` | Class applied to result when results exist. | `'bigglesworth_on'`
+`classOff` | Class applied to result when results do not exist. | `'bigglesworth_off'`
 `feed` | The search data file. | `'search.json'`
 `limit` | Result limit. | `5`
 `buffer` | Search buffer. | `300`
@@ -211,8 +213,8 @@ Option | Description | Default
  Example:
 
  ```js
- var $ul = $('<ul>', { id : 'bigglesworth_results' }),
- $div = $('<div>', { id : 'bigglesworth_results-no' }),
+ var $ul = $('<ul>', { id : 'bigglesworth_result' }),
+ $div = $('<div>', { id : 'bigglesworth_result-no' }),
  $search = $('#bigglesworth');
  
  $search

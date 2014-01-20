@@ -8,6 +8,10 @@
 
 //----------------------------------
 
+// @todo Is there a better way to handle on/off classes?
+
+//----------------------------------
+
 // Notes to self:
 //console.profile('profile foo');
 // ... code here ...
@@ -57,18 +61,20 @@
 	
 	defaults = {
 		
-		results           : '#' + NS + '_results',                     // Target results element.
-		resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // Results HTML "template".
-		resultsNo         : '#' + NS + '_results-no',                  // Target "no" results element.
-		resultsNoTemplate : '<p>Nothing recent found.</p>',            // No results HTML template.
-		feed              : 'search.json',                             // The search data file.
-		limit             : 5,                                         // Result limit.
-		buffer            : 300,                                       // Search buffer.
-		onInit            : $.noop,                                    // Callback on plugin initialization.
-		onAfterInit       : $.noop,                                    // Callback after plugin initialization.
-		onResult          : $.noop,                                    // Callback when result added.
-		onRemove          : $.noop,                                    // Callback when result removed.
-		onZilch           : $.noop                                     // Callback for no results.
+		result           : '#' + NS + '_results',                    // Target result element.
+		resultTemplate   : '<p><a href="{ uri }">{ title }</a></p>', // Result HTML "template".
+		resultNo         : '#' + NS + '_results-no',                 // Target "no" result element.
+		resultNoTemplate : '<p>Nothing recent found.</p>',           // No result HTML template.
+		classOn          : NS + '_on',                               // Class applied to result when results exist.
+		classOff         : NS + '_off',                              // Class applied to result when results do not exist.
+		feed             : 'search.json',                            // The search data file.
+		limit            : 5,                                        // Result limit.
+		buffer           : 300,                                      // Search buffer.
+		onInit           : $.noop,                                   // Callback on plugin initialization.
+		onAfterInit      : $.noop,                                   // Callback after plugin initialization.
+		onResult         : $.noop,                                   // Callback when result added.
+		onRemove         : $.noop,                                   // Callback when result removed.
+		onZilch          : $.noop                                    // Callback for no results.
 		
 	}, // defaults
 	
@@ -123,15 +129,15 @@
 					
 					$this.data(NS, {
 						
-						init      : false,                 // Plugin initialization flag.
-						settings  : settings,              // Merged plugin settings.
-						target    : $this,                 // Target element plugin has been initialized on (assumed to be a form `input` element).
-						form      : $this.closest('form'), // The `input`'s parent `form`.
-						results   : $(settings.results),   // Results target element.
-						resultsNo : $(settings.resultsNo), // No results target element.
-						matches   : [],                    // Container for matched results for `query`.
-						query     : '',                    // Search terms.
-						json      : null                   // The parsed data returned from JSON feed.
+						init     : false,                 // Plugin initialization flag.
+						settings : settings,              // Merged plugin settings.
+						target   : $this,                 // Target element plugin has been initialized on (assumed to be a form `input` element).
+						form     : $this.closest('form'), // The `input`'s parent `form`.
+						result   : $(settings.result),    // Result target element.
+						resultNo : $(settings.resultNo),  // No result target element.
+						matches  : [],                    // Container for `query`'s matched result.
+						query    : '',                    // Search terms.
+						json     : null                   // The parsed data returned from JSON feed.
 						
 					});
 					
@@ -189,8 +195,7 @@
 				// Declare, hoist and initialize:
 				//----------------------------------
 				
-				var $this = $(this),
-				    data  = $this.data(NS);
+				var data = $(this).data(NS);
 				
 				//----------------------------------
 				// Data?
@@ -198,13 +203,21 @@
 				
 				if (data) {
 					
-					$this // ... hot chaining action -->
+					data.target // ... hot chaining action -->
 					
 					//----------------------------------
 					// Namespaced instance data:
 					//----------------------------------
 					
 					.removeData(NS) // -->
+					
+					//----------------------------------
+					// Remove classes:
+					//----------------------------------
+					
+					.removeClass(data.settings.classOff) // -->
+					
+					.removeClass(data.settings.classOn) // -->
 					
 					//----------------------------------
 					// Namespaced events:
@@ -224,7 +237,16 @@
 					// Namespaced events:
 					//----------------------------------
 					
-					.off('submit.' + NS); // Done!
+					.off('submit.' + NS); // Done with target.
+					
+					//----------------------------------
+					// Remove classes:
+					//----------------------------------
+					
+					data.result // Take result jQuery object ...
+						.add(data.resultNo) // ... add the "no" result jQuery object ...
+						.removeClass(data.settings.classOn) // ... and remove ...
+						.removeClass(data.settings.classOff); // ... classes. :)
 					
 				}
 				
@@ -266,7 +288,15 @@
 		// Check for "result" elements:
 		//----------------------------------
 		
-		if (data.results.length && data.resultsNo.length) {
+		if (data.result.length && data.resultNo.length) {
+			
+			//----------------------------------
+			// Add class:
+			//----------------------------------
+			
+			data.result
+				.add(data.resultNo)
+				.addClass(data.settings.classOff);
 			
 			//----------------------------------
 			// Wait for first "focus" event:
@@ -324,7 +354,7 @@
 			// Ouch!
 			//----------------------------------
 			
-			console.warn('jQuery.%s can\'t find either a "results" (%o) or "resultsNo" (%o) elements for %o.', NS, data.results, data.resultsNo, data.target);
+			console.warn('jQuery.%s can\'t find either a "results" (%o) or "resultsNo" (%o) elements for %o.', NS, data.result, data.resultNo, data.target);
 			
 		}
 		
@@ -387,7 +417,7 @@
 						// Yes, so navigate to first result:
 						//----------------------------------
 						
-						window.location = data.matches[0].uri; // On ENTER, goes to first result's "url".
+						window.location = data.matches[0].uri; // On ENTER, goes to first result's "uri".
 						
 					} else {
 						
@@ -396,7 +426,7 @@
 						//----------------------------------
 						
 						data.form[0]
-							.submit();
+							.submit(); // Go!
 						
 					}
 					
@@ -418,6 +448,15 @@
 					);
 					
 				} else {
+					
+					//----------------------------------
+					// Juggle classes ...
+					//----------------------------------
+					
+					data.result // Take result jQuery object ...
+						.add(data.resultNo) // ... add the "no" result jQuery object ...
+						.removeClass(data.settings.classOn) // ... add one class ...
+						.addClass(data.settings.classOff); // ... and remove the other class.
 					
 					//----------------------------------
 					// No, so clear the matched results:
@@ -507,6 +546,7 @@
 	 * @type { function }
 	 * @param { object } data Parent data object literal.
 	 * @param { object } matches Matched data.
+	 * @param { function } callback Optional callback method.
 	 */
 	
 	_write = function(data, matches) {
@@ -544,6 +584,18 @@
 				
 			}
 			
+			//----------------------------------
+			// Juggle classes:
+			//----------------------------------
+			
+			data.result
+				.removeClass(data.settings.classOff)
+				.addClass(data.settings.classOn);
+			
+			data.resultNo
+				.removeClass(data.settings.classOn)
+				.addClass(data.settings.classOff);
+			
 		} else {
 			
 			//----------------------------------
@@ -551,6 +603,18 @@
 			//----------------------------------
 			
 			$.fn[NS].zilch(data);
+			
+			//----------------------------------
+			// Juggle classes:
+			//----------------------------------
+			
+			data.result
+				.removeClass(data.settings.classOn)
+				.addClass(data.settings.classOff);
+			
+			data.resultNo
+				.removeClass(data.settings.classOff)
+				.addClass(data.settings.classOn);
 			
 		}
 		
@@ -685,7 +749,7 @@
 		// Combine result and template:
 		//----------------------------------
 		
-		var item = data.settings.resultsTemplate.replace(/\{(.*?)\}/g, function(match, property) {
+		var item = data.settings.resultTemplate.replace(/\{(.*?)\}/g, function(match, property) {
 			
 			//----------------------------------
 			// Return property if it exists:
@@ -705,7 +769,7 @@
 		// Add formatted result to DOM:
 		//----------------------------------
 		
-		data.results.append(item);
+		data.result.append(item);
 		
 	}; // $.fn[NS].format
 	
@@ -729,7 +793,7 @@
 		// Add "no results" template to DOM:
 		//----------------------------------
 		
-		data.resultsNo.append(data.settings.resultsNoTemplate);
+		data.resultNo.append(data.settings.resultNoTemplate);
 		
 	}; // $.fn[NS].zilch
 	
@@ -747,7 +811,7 @@
 		// Loop over "result" objects:
 		//----------------------------------
 		
-		$.each([data.results, data.resultsNo], function() {
+		$.each([data.result, data.resultNo], function() {
 			
 			//----------------------------------
 			// Declare, hoist and initialize:
@@ -772,7 +836,7 @@
 				// ... and remove HTML from DOM:
 				//----------------------------------
 				
-				$children.remove();
+				$children.remove(); // https://github.com/mhulse/jquery-bigglesworth/issues/12
 				
 			}
 			

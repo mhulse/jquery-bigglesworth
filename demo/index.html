@@ -42,13 +42,17 @@
 			   -moz-background-clip: padding;
 					background-clip: padding-box;
 		}
+		input[type="search"]::-webkit-search-decoration,
+		input[type="search"]::-webkit-search-cancel-button,
+		input[type="search"]::-webkit-search-results-button,
+		input[type="search"]::-webkit-search-results-decoration { display: none; }
 		
-		/* Demo: */
+		/*----------------------------------( DEMO )----------------------------------*/
 		
 		#search { position: relative; }
 		
-		#bigglesworth_results,
-		#bigglesworth_results-no {
+		#bigglesworth_result,
+		#bigglesworth_result-no {
 			margin: 0;
 			padding: 0;
 			position: absolute;
@@ -57,18 +61,23 @@
 			width: 100%;
 			z-index: 100;
 		}
-		#bigglesworth_results li,
-		#bigglesworth_results-no p {
+		
+		#bigglesworth_result li,
+		#bigglesworth_result-no p {
 			border: 1px solid #ddd;
 			background: rgba(255, 255, 255, .9);
 			margin: 0;
 			padding: 10px;
 		}
 		
-		#bigglesworth_results li {
+		#bigglesworth_result li {
 			margin: 0 0 -1px;
 			list-style: none;
 		}
+		
+		/* https://github.com/mhulse/jquery-bigglesworth/issues/13 */
+		.bigglesworth_on { display: block; }
+		.bigglesworth_off { display: none; }
 		
 	</style>
 	
@@ -105,7 +114,7 @@
 			// http://stackoverflow.com/a/11335081/922323
 			$.fn.bigglesworth.format = function(data, obj) {
 				
-				data.results.append(
+				data.result.append(
 					'<li>' +
 						obj.date.month + ' ' + obj.date.day + ', ' + obj.date.year + ' | ' +
 						'<a href="' + obj.uri + '">' +
@@ -118,7 +127,7 @@
 			
 			$.fn.bigglesworth.zilch = function(data) {
 				
-				data.resultsNo.append(
+				data.resultNo.append(
 					'<p>' +
 						'Nothing recent found.' +
 						'<br>' +
@@ -136,8 +145,8 @@
 				
 			};
 			
-			var $ul = $('<ul>', { id : 'bigglesworth_results' }),
-			    $div = $('<div>', { id : 'bigglesworth_results-no' }),
+			var $ul = $('<ul>', { id : 'bigglesworth_result', 'class' : 'bigglesworth_off' }),
+			    $div = $('<div>', { id : 'bigglesworth_result-no', 'class' : 'bigglesworth_off' }),
 			    $search = $('#bigglesworth');
 			
 			$search
@@ -145,18 +154,20 @@
 				.after($div, $ul);
 			
 			$search.bigglesworth({
-				results           : '#bigglesworth_results',
-				resultsTemplate   : '<p><a href="{ uri }">{ title }</a></p>',
-				resultsNo         : '#bigglesworth_results-no',
-				resultsNoTemplate : '<p>Nothing recent found.</p>',
-				feed              : 'search.json',
-				limit             : 5,
-				buffer            : 300,
-				onInit            : function(data) { console.log('onInit:', $(this), data); },
-				onAfterInit       : function(data) { console.log('onAfterInit:', $(this), data); },
-				onResult          : function(obj, item, data) { console.log('onResult:', $(this), obj, item, data); },
-				onRemove          : function(el, children, data) { console.log('onRemove:', $(this), el, children, data); },
-				onZilch           : function(data) { console.log('onZilch:', $(this), data); }
+				result           : '#bigglesworth_result',
+				resultTemplate   : '<p><a href="{ uri }">{ title }</a></p>',
+				resultNo         : '#bigglesworth_result-no',
+				resultNoTemplate : '<p>Nothing recent found.</p>',
+				classOn          : 'bigglesworth_on',
+				classOff         : 'bigglesworth_off',
+				feed             : 'search.json',
+				limit            : 5,
+				buffer           : 300,
+				onInit           : function(data) { console.log('onInit:', $(this), data); },
+				onAfterInit      : function(data) { console.log('onAfterInit:', $(this), data); },
+				onResult         : function(obj, item, data) { console.log('onResult:', $(this), obj, item, data); },
+				onRemove         : function(el, children, data) { console.log('onRemove:', $(this), el, children, data); },
+				onZilch          : function(data) { console.log('onZilch:', $(this), data); }
 			});
 			
 			//$search.bigglesworth('destroy');
